@@ -5,8 +5,8 @@ Project for creating index mapping hdf5 object names -> file offsets.  These ind
 
 ## Requirements
 
-pyfive
-certifi 
+* pyfive==0.3.0
+* certifi
 
 ## Usage
 
