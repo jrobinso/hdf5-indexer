@@ -1,6 +1,7 @@
 # h5-indexer
 
-Project for creating index mapping hdf5 object names -> file offsets
+Project for creating index mapping hdf5 object names -> file offsets.  These indexes can be used with
+[jsfive-async](https://github.com/jrobinso/jsfive-async) for efficient remote URL access.
 
 ## Requirements
 
@@ -11,10 +12,11 @@ certifi
 
 ```python
 
-python h5_indexer.indexer.py(path)
+python h5_indexer.indexer.py(path, output)
 
 ```
 
-where 'path' is  file path or URL
+where 'path' is  the input hdf5 file path or URL, and 'output' is the file path for the created index.
+
 
 

@@ -1,2 +1,2 @@
-pyfive
+pyfive==0.3.0
 certifi
