@@ -1,1 +1,1 @@
-import indexer
+from indexer import make_index
