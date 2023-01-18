@@ -3,7 +3,7 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setuptools.setup(name='igv-reports',
+setuptools.setup(name='h5-indexer',
                  packages=['h5_indexer'],
                  version='0.1.0',
                  description='Creates an index of container -> file offset of HDF5 files.',
