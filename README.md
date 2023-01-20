@@ -1,4 +1,4 @@
-# h5-indexer
+# hdf5-indexer
 
 Project for creating index mapping hdf5 object names -> file offsets.  These indexes can be used with
 [jsfive-async](https://github.com/jrobinso/jsfive-async) for efficient remote URL access.
