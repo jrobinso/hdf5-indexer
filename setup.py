@@ -18,7 +18,7 @@ setuptools.setup(name='hdf5-indexer',
                      'Topic :: Scientific/Engineering :: Bio-Informatics :: HDF5'
                  ],
                  install_requires=[
-                     'pyfive==0.3.0', 'certifi'
+                     'pyfive==0.3.0', 'requests'
                  ],
                  entry_points={
                      'console_scripts': [

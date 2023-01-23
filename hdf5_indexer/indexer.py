@@ -1,20 +1,19 @@
 import pyfive
 import argparse
 import json
-from urllib.request import urlopen
 import io
-import ssl
-import certifi
+import requests
+
 
 def make_index(path, output):
-
-    if path.startswith("https://") :
-        with urlopen(path, context=ssl.create_default_context(cafile=certifi.where())) as file:
-            content = file.read()
-            f = pyfive.File(io.BytesIO(content))
+    if path.startswith("https://"):
+        if path.startswith("https://www.dropbox.com"):
+            path = path.replace("www.dropbox.com", "dl.dropboxusercontent.com")
+        r = requests.get(path)
+        obj = io.BytesIO(r.content)
+        f = pyfive.File(io.BytesIO(r.content))
     else:
         f = pyfive.File(path)
-
 
     index = {}
     index_children(f, index)
@@ -24,7 +23,6 @@ def make_index(path, output):
 
 
 def index_children(group, index):
-
     children = {}
     for key in group.keys():
         child = group.get(key)
@@ -34,7 +32,6 @@ def index_children(group, index):
         if hasattr(child, 'keys'):
             index_children(child, index)
     index[group.name] = children
-
 
 
 def main():
