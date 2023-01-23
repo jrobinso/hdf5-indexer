@@ -1,7 +1,7 @@
 # hdf5-indexer
 
 Project for creating index mapping hdf5 object names -> file offsets.  These indexes can be used with
-[jsfive-async](https://github.com/jrobinso/jsfive-async) for efficient remote URL access.
+[hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), built on [jsfive](https://github.com/usnistgov/jsfive) with the help of @bmaranville, for efficient remote URL access.
 
 ## Requirements
 
