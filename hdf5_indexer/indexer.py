@@ -1,28 +1,18 @@
 import pyfive
 import argparse
 import json
-import io
-import requests
 
 
 def make_index(path, output):
-    if path.startswith("https://"):
-        if path.startswith("https://www.dropbox.com"):
-            path = path.replace("www.dropbox.com", "dl.dropboxusercontent.com")
-        r = requests.get(path)
-        obj = io.BytesIO(r.content)
-        f = pyfive.File(io.BytesIO(r.content))
-    else:
-        f = pyfive.File(path)
 
+    f = pyfive.File(path)
     index = {}
-    index_children(f, index)
-
+    _index_children(f, index)
     with open(output, "w") as o:
         json.dump(index, o)
 
 
-def index_children(group, index):
+def _index_children(group, index):
     children = {}
     for key in group.keys():
         child = group.get(key)
@@ -30,7 +20,7 @@ def index_children(group, index):
         children[key] = offset
 
         if hasattr(child, 'keys'):
-            index_children(child, index)
+            _index_children(child, index)
     index[group.name] = children
 
 
