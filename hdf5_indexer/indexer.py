@@ -1,15 +1,53 @@
 import pyfive
+import h5py
 import argparse
 import json
+import numpy
+import gzip
 
 
-def make_index(path, output):
+def make_index(path, outfile=None, dset_name='_index', append=True):
 
-    f = pyfive.File(path)
-    index = {}
-    _index_children(f, index)
-    with open(output, "w") as o:
-        json.dump(index, o)
+    '''
+    Create an index mapping h5 object names -> file offset positions.  By default compressed json for the  will be inserted into
+    the h5 file as a top level dataset named "_index" as compressed json.  Optionally the index json can be dumped
+    to an output file.
+
+    :param path: File path to the h5 file
+    :param append: Append the index to the h5 file as a dataset.  Defaults to True
+    :param dset_name: Index dataset name.  Optional, defaults to "_index".  Do not change this without good reason as reader clients might not recognize a different name
+    :param outfile: Optional file path for output json
+    '''
+
+    # Walk nodes and create index.  The pyfive library is used as it gives us access to the nodes file offset.
+    try:
+        f = pyfive.File(path)
+        index = {}
+        _index_children(f, index)
+    finally:
+        f.close()
+
+    if append:
+        # Convert to json and compress the result
+        index_json = json.dumps(index)
+        comp = gzip.compress(bytes(index_json, 'utf-8'))
+
+        # Open file again, with h5py, and add the compressed index json as an opaque dataset
+        f = h5py.File(path, 'r+')
+
+        if dset_name in f:
+            del f[dset_name]
+
+        dt = h5py.opaque_dtype(numpy.void(comp))
+        dset = f.create_dataset(dset_name, (1), dtype=dt)
+        dset[0] = comp
+        f.flush()
+        f.close()
+
+    # Optionally output index json to file
+    if outfile is not None:
+        with open(outfile, 'w') as o:
+            json.dump(index, o, indent=4)
 
 
 def _index_children(group, index):
@@ -26,12 +64,13 @@ def _index_children(group, index):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("path", help="path to input hdf5 file")
-    parser.add_argument("output", help="path to output index (json) file")
-
+    parser.add_argument('path', help='path to input hdf5 file')
+    parser.add_argument('-o', '--outfile', default=None, help='path to output index (json) file')
+    parser.add_argument('-a', '--append', default=True, type=bool, help='add index to hdf5 file')
+    parser.add_argument('-d', '--dataset', default='_index', help='dataset name')
     args = parser.parse_args()
-    make_index(args.path, args.output)
+    make_index(args.path, outfile=args.outfile, dset_name=args.dataset, append=args.append)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

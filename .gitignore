@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 /venv/
 /.idea/
+/spleen_1chr1rep.cndb
+/spleen_1chr1rep.index.json

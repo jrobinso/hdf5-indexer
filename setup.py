@@ -18,12 +18,12 @@ setuptools.setup(name='hdf5-indexer',
                      'Topic :: Scientific/Engineering :: Bio-Informatics :: HDF5'
                  ],
                  install_requires=[
-                     'pyfive==0.3.0'
+                     'pyfive==0.3.0', 'h5py', 'numpy'
                  ],
                  entry_points={
                      'console_scripts': [
-                         'h5index=h5_indexer.indexer:main',
+                         'h5index=hdf5_indexer.indexer:main',
                      ],
                  },
-                 package_data={'h5_indexers': ['templates/*']},
+                 package_data={'hdf5_indexer': ['templates/*']},
                  )
