@@ -1,8 +1,7 @@
 # hdf5-indexer
 
 Tool for creating index mapping hdf5 object names -> file offsets.  These indexes can be used with
-[hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), an extension  
-of [jsfive](https://github.com/usnistgov/jsfive), for efficient remote URL access.
+[hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), for efficient remote URL access to hdf5 files
 
 
 ## Installation
