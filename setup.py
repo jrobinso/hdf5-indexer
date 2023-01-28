@@ -23,7 +23,7 @@ setuptools.setup(name='hdf5-indexer',
                  entry_points={
                      'console_scripts': [
                          'h5index=hdf5_indexer.index:main',
-                         'h5extract-index=hdf5_indexer.extract_index:main'
+                         'h5extract=hdf5_indexer.extract_index:main'
                      ],
                  },
                  package_data={'hdf5_indexer': ['templates/*']},

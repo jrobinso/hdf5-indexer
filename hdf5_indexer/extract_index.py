@@ -9,7 +9,11 @@ def extract_index(path, outfile = None, dataset_name = "_index"):
 
 
     f = h5py.File(path, 'r')
-    dataset = f[dataset_name]
+    try:
+        dataset = f[dataset_name]
+    except:
+        dataset = None
+        pass
 
     if dataset is None:
         print('No index found')
