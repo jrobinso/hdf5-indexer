@@ -68,7 +68,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', help='path to input hdf5 file')
     parser.add_argument('-o', '--outfile', default=None, help='path to output index (json) file')
-    parser.add_argument('-n', '--noappend', type=bool, help='add index dataset to hdf5 file', action=argparse.BooleanOptionalAction)
+    parser.add_argument('-n', '--noappend',  help='add index dataset to hdf5 file', action='store_true')
     parser.add_argument('-d', '--dataset', default='_index', help='dataset name')
     args = parser.parse_args()
     make_index(args.path, outfile=args.outfile, dset_name=args.dataset, append=(not args.noappend))
