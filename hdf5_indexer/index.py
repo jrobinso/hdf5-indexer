@@ -20,12 +20,14 @@ def make_index(path, outfile=None, dset_name='_index', append=True):
     '''
 
     # Walk nodes and create index.  The pyfive library is used as it gives us access to the nodes file offset.
+    f = None
     try:
         f = pyfive.File(path)
         index = {}
         _index_children(f, index)
     finally:
-        f.close()
+        if f is not None:
+            f.close()
 
     if append:
         # Convert to json and compress the result
@@ -66,10 +68,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', help='path to input hdf5 file')
     parser.add_argument('-o', '--outfile', default=None, help='path to output index (json) file')
-    parser.add_argument('-a', '--append', default=True, type=bool, help='add index to hdf5 file')
+    parser.add_argument('-n', '--noappend', type=bool, help='add index dataset to hdf5 file', action=argparse.BooleanOptionalAction)
     parser.add_argument('-d', '--dataset', default='_index', help='dataset name')
     args = parser.parse_args()
-    make_index(args.path, outfile=args.outfile, dset_name=args.dataset, append=args.append)
+    make_index(args.path, outfile=args.outfile, dset_name=args.dataset, append=(not args.noappend))
 
 
 if __name__ == '__main__':
