@@ -6,6 +6,8 @@ Tool for creating index mapping hdf5 object names -> file offsets.  These indexe
 
 ## Installation
 
+**Requires Python 3.8**
+
 ```
 pip install git+https://github.com/jrobinso/hdf5-indexer.git
 ```
@@ -49,6 +51,17 @@ import hdf5_indexer
 hdf5_indexer.make_index('spleen_1chr1rep.cndb')
 ```
 
+## Example
+
+**Note: Requires python 3.8**
+
+```commandline
+
+wget https://www.dropbox.com/s/7hmj25az1vgaejf/spleen_1chr1rep.cndb?dl=0 -O spleen_1chr1rep.cndb
+pip install git+https://github.com/jrobinso/hdf5-indexer.git
+h5index spleen_1chr1rep.cndb
+
+```
 
 ## Example notebook
 
