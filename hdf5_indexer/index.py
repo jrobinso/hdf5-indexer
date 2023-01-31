@@ -30,19 +30,22 @@ def make_index(path, outfile=None, dset_name='_index', append=True):
             f.close()
 
     if append:
-        # Convert to json and compress the result
-        index_json = json.dumps(index)
-        comp = gzip.compress(bytes(index_json, 'utf-8'))
-
         # Open file again, with h5py, and add the compressed index json as an opaque dataset
         f = h5py.File(path, 'r+')
 
         if dset_name in f:
             del f[dset_name]
 
+
+        # Convert to json and compress the result
+        index_json = json.dumps(index)
+        comp = gzip.compress(bytes(index_json, 'utf-8'))
+
+        # Create dataset
         dt = h5py.opaque_dtype(numpy.void(comp))
         dset = f.create_dataset(dset_name, (1), dtype=dt)
         dset[0] = comp
+
         f.flush()
         f.close()
 

@@ -3,10 +3,16 @@
 Tool for creating index mapping hdf5 object names -> file offsets.  These indexes can be used with
 [hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), for efficient remote URL access to hdf5 files
 
+## Limitations
+
+This project is experimental, and designed for a specific schema ("CNDB").  Although an index can be created for any
+hdf5 file, the associated javascript reader has the same limitations as the [jsfive](https://github.com/usnistgov/jsfive) 
+library on which it is based.
+
 
 ## Installation
 
-**Requires Python 3.8**
+**Tested with Python 3.8**
 
 ```
 pip install git+https://github.com/jrobinso/hdf5-indexer.git
@@ -14,6 +20,8 @@ pip install git+https://github.com/jrobinso/hdf5-indexer.git
 
 
 ## Command Line Usage
+
+### h5index
 
 Use h5index to index an hdf5 file.  By default this utility will build an index, gzip it, and at it to the hdf5 as a top-level
 dataset named "_index".   If the "_index" dataset exists it is overwitten.
@@ -32,16 +40,32 @@ h5index inputfile <options>
     * __-n --noappend__ .  Flag - do not append index to hdf5 file.  This is not common.
 
 
+### h5extract
+
 To verify creation of the index use the h5extract utility.  This will extract the "_index" dataset, gunzip it, and 
 print the json to stdout.  
 
 ```commandline
-h5extract inputfile
+h5extract hdf5file
 ```
 **Arguments:**
 
 * Required
-  * __inputfile__   The hdf5 file to extract index from
+  * __hdf5file__   The hdf5 file to extract index from
+
+### h5update-offset
+
+To annotate an indexed hdf5 file with the file offset location of the index Dataset use h5update-offset.  This is
+only neccessary for files indexed prior to release 0.1.1.  The offset information is used to avoid searching for the 
+dataset at startup time, which can save up to a minute or more for large files with many top-level groups and datasets.
+
+```commandline
+h5extract h5update-offset hdf5file
+```
+**Arguments:**
+
+* Required
+  * __hdf5file__   The hdf5 file to extract index from
 
 
 ## Programmatic usage

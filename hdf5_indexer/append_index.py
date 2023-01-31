@@ -7,7 +7,11 @@ import numpy
 def append_index(path, index_path, dataset_name = "_index"):
 
     '''
-    Create an index dataset from an existing index json file
+    Add an index Dataset to CNDB hdf5 file
+    :param path: Path to CNDB file
+    :param index_path: Path to index json file
+    :param dataset_name: Optional override for name of CNDB dataset.
+    :return:
     '''
 
     with open(index_path, 'rb') as index_file:

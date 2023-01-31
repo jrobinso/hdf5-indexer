@@ -2,11 +2,16 @@ import h5py
 import argparse
 import gzip
 
-'''
-Create an index dataset from an existing index json file
-'''
+
 def extract_index(path, outfile = None, dataset_name = "_index"):
 
+    '''
+    Extract the index json from a CNDB file.
+    :param path: Path to CNDB file
+    :param outfile: Optional path to output file.  If ommitted output is printed to stdout
+    :param dataset_name: Optional override for name of CNDB Dataset containing index.
+    :return:
+    '''
 
     f = h5py.File(path, 'r')
     try:
