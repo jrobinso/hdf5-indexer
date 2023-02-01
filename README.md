@@ -5,9 +5,7 @@ Tool for creating index mapping hdf5 object names -> file offsets.  These indexe
 
 ## Limitations
 
-This project is experimental, and designed for a specific schema ("CNDB").  Although an index can be created for any
-hdf5 file, the associated javascript reader has the same limitations as the [jsfive](https://github.com/usnistgov/jsfive) 
-library on which it is based.
+This project is experimental, and designed for a specific schema ("CNDB"). although it should be generally useful for projects wishing to access HDF5 files over the web.  Indexed objects include Groups and Datasets.   The associated javascript reader loads objects in their entirety, in particular slicing and subsetting of Datasets is not supported by the reader.  This makes the project suitable for schemas containing many small Datasets, larger Datasets will likely not be loadable in the browser.
 
 
 ## Installation
@@ -55,9 +53,7 @@ h5extract hdf5file
 
 ### h5update-offset
 
-To annotate an indexed hdf5 file with the file offset location of the index Dataset use h5update-offset.  This is
-only neccessary for files indexed prior to release 0.1.1.  The offset information is used to avoid searching for the 
-dataset at startup time, which can save up to a minute or more for large files with many top-level groups and datasets.
+Used to add an attribute to the root object containing the file offset to the index Dataset.   Files with this attribute can load faster as the index can be loaded directly and used, rather than searched for.   This is  only neccessary for files indexed prior to release 0.1.1. 
 
 ```commandline
 h5extract h5update-offset hdf5file
@@ -65,7 +61,7 @@ h5extract h5update-offset hdf5file
 **Arguments:**
 
 * Required
-  * __hdf5file__   The hdf5 file to extract index from
+  * __hdf5file__   The hdf5 file
 
 
 ## Programmatic usage
