@@ -4,7 +4,7 @@ import argparse
 import json
 import numpy
 import gzip
-
+from hdf5_indexer.update_offset import update_offset
 
 def make_index(path, outfile=None, dset_name='_index', append=True):
 
@@ -45,9 +45,11 @@ def make_index(path, outfile=None, dset_name='_index', append=True):
         dt = h5py.opaque_dtype(numpy.void(comp))
         dset = f.create_dataset(dset_name, (1), dtype=dt)
         dset[0] = comp
-
         f.flush()
         f.close()
+
+        # Second pass -- record index offset
+        update_offset(path, dset_name)
 
     # Optionally output index json to file
     if outfile is not None:

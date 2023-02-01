@@ -8,9 +8,7 @@ def update_offset(path, dset_name='_index'):
 
     if offset is not None:
         f = h5py.File(path, 'r+')
-
         f.attrs.create("_index_offset", offset)
-
         f.flush()
         f.close()
 
