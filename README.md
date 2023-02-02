@@ -38,6 +38,35 @@ h5index inputfile <options>
     * __-n --noappend__ .  Flag - do not append index to hdf5 file.  This is not common.
 
 
+## Programmatic usage
+
+```python
+import hdf5_indexer
+hdf5_indexer.make_index('spleen_1chr1rep.cndb')
+```
+
+## Example
+
+**Note: Requires python 3.8**
+
+```commandline
+
+wget https://www.dropbox.com/s/7hmj25az1vgaejf/spleen_1chr1rep.cndb?dl=0 -O spleen_1chr1rep.cndb
+pip install git+https://github.com/jrobinso/hdf5-indexer.git
+h5index spleen_1chr1rep.cndb
+
+```
+
+## Example notebook
+
+An example notebook illustrating basic usage is available in [Colab](https://colab.research.google.com/drive/1zZwt8U8mYgAo3ewWZvF6CIpjL1OENNoO?usp=sharing)
+
+
+## Utilities
+
+The command line utilities below are used for test and development. 
+
+
 ### h5extract
 
 To verify creation of the index use the h5extract utility.  This will extract the "_index" dataset, gunzip it, and 
@@ -63,29 +92,6 @@ h5extract h5update-offset hdf5file
 * Required
   * __hdf5file__   The hdf5 file
 
-
-## Programmatic usage
-
-```python
-import hdf5_indexer
-hdf5_indexer.make_index('spleen_1chr1rep.cndb')
-```
-
-## Example
-
-**Note: Requires python 3.8**
-
-```commandline
-
-wget https://www.dropbox.com/s/7hmj25az1vgaejf/spleen_1chr1rep.cndb?dl=0 -O spleen_1chr1rep.cndb
-pip install git+https://github.com/jrobinso/hdf5-indexer.git
-h5index spleen_1chr1rep.cndb
-
-```
-
-## Example notebook
-
-An example notebook illustrating basic usage is available in [Colab](https://colab.research.google.com/drive/1zZwt8U8mYgAo3ewWZvF6CIpjL1OENNoO?usp=sharing)
 
 
 
