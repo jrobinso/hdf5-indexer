@@ -5,17 +5,17 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(name='hdf5-indexer',
                  packages=['hdf5_indexer'],
-                 version='0.1.1',
-                 description='Creates an index of container -> file offset of HDF5 files.',
+                 version='0.5.0',
+                 description='Annotates an HDF5 file with an index of container pathname -> file offset.',
                  long_description=long_description,
                  long_description_content_type="text/markdown",
                  license='MIT',
                  author='Jim Robinson',
-                 url='https://github.com/igvteam/igv-reports',
-                 keywords=['igv', 'bioinformatics', 'genomics', 'visualization', 'variant' ],
+                 url='https://github.com/igvteam/hdf5-indexer',
+                 keywords=['HDF5'],
                  classifiers=[
                      'License :: OSI Approved :: MIT License',
-                     'Topic :: Scientific/Engineering :: Bio-Informatics :: HDF5'
+                     'Topic :: Scientific/Engineering ::  HDF5'
                  ],
                  install_requires=[
                      'pyfive==0.3.0', 'h5py', 'numpy'
@@ -27,6 +27,5 @@ setuptools.setup(name='hdf5-indexer',
                          'h5extract-offset=hdf5_indexer.extract_offset:main',
                          'h5update-offset=hdf5_indexer.update_offset:main'
                      ],
-                 },
-                 package_data={'hdf5_indexer': ['templates/*']},
+                 }
                  )

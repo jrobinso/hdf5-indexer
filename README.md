@@ -1,11 +1,18 @@
 # hdf5-indexer
 
-Tool for creating index mapping hdf5 object names -> file offsets.  These indexes can be used with
-[hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), for efficient remote URL access to hdf5 files
+Tool for annotating HDF5 files with an index dataset mapping container paths to file offsets.   The index can be used by 
+readers, such as [hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), to directly access individual 
+containers without first walking the linked list of ancestor and sibling nodes to find the container's file offset. 
+The  driving use case is web based access to individual datasets from large HDF5 files (100s of GB) containing
+thousands of individual datasets.  
 
 ## Limitations
 
-This project is experimental, and designed for a specific schema ("CNDB"). although it should be generally useful for projects wishing to access HDF5 files over the web.  Indexed objects include Groups and Datasets.   The associated javascript reader loads objects in their entirety, in particular slicing and subsetting of Datasets is not supported by the reader.  This makes the project suitable for schemas containing many small Datasets, larger Datasets will likely not be loadable in the browser.
+The project is designed for large HDF5 files containing many datasets.  Performance will not likely be improved
+for small HDF5 files  (< 100 MB) which can be read in their entirety.
+
+The indexer is built on [pyfive](https://github.com/jjhelmus/pyfive), and the associated reader is 
+built on [jsfive](https://github.com/usnistgov/jsfive), so limitations of those projects apply.  
 
 
 ## Installation

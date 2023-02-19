@@ -9,9 +9,9 @@ from hdf5_indexer.update_offset import update_offset
 def make_index(path, outfile=None, dset_name='_index', append=True):
 
     '''
-    Create an index mapping h5 object names -> file offset positions.  By default compressed json for the  will be inserted into
-    the h5 file as a top level dataset named "_index" as compressed json.  Optionally the index json can be dumped
-    to an output file.
+    Create an index mapping h5 object names -> childrens file offset positions.  The index is stored as a json string.
+    By default the json is compressed and inserted into the h5 file as a top level OPAQUE dataset named "_index".
+    Optionally the index json can be dumped to an output file.
 
     :param path: File path to the h5 file
     :param append: Append the index to the h5 file as a dataset.  Defaults to True
