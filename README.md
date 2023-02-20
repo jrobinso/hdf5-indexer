@@ -28,7 +28,7 @@ pip install git+https://github.com/jrobinso/hdf5-indexer.git
 
 ### h5index
 
-Use h5index to index an hdf5 file.  By default this utility will build an index, gzip it, and at it to the hdf5 as a top-level
+Index an hdf5 file.  By default this utility will build an index, gzip it, and at it to the hdf5 as a top-level
 dataset named "_index".   If the "_index" dataset exists it is overwitten.
 
 ```commandline
