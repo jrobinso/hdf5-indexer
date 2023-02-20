@@ -1,6 +1,6 @@
 # hdf5-indexer
 
-Tool for annotating HDF5 files with an index dataset mapping container paths to file offsets.   The index can be used by 
+Tool for annotating HDF5 files with an index  mapping container paths to file offsets.   The index can be used by 
 readers, such as [hdf5-indexed-reader](https://github.com/jrobinso/hdf5-indexed-reader), to directly access individual 
 containers without first walking the linked list of ancestor and sibling nodes to find the container's file offset. 
 The  driving use case is web based access to individual datasets from large HDF5 files (100s of GB) containing
