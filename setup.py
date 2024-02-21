@@ -18,7 +18,7 @@ setuptools.setup(name='hdf5-indexer',
                      'Topic :: Scientific/Engineering ::  HDF5'
                  ],
                  install_requires=[
-                     'h5py', 'numpy'
+                    'pyfive', 'h5py', 'numpy'
                  ],
                  dependency_links=["git+https://github.com/jjhelmus/pyfive.git@master#egg=pyfive"],
                  entry_points={
