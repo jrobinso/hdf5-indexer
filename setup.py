@@ -20,7 +20,6 @@ setuptools.setup(name='hdf5-indexer',
                  install_requires=[
                      'pyfive @ git+https://github.com/jjhelmus/pyfive.git', 'h5py', 'numpy'
                  ],
-                 dependency_links=["git+https://github.com/jjhelmus/pyfive.git@master#egg=pyfive"],
                  entry_points={
                      'console_scripts': [
                          'h5index=hdf5_indexer.index:main',
