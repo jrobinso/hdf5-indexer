@@ -1,3 +1,3 @@
-pyfive==0.3.0
+git+https://github.com/jjhelmus/pyfive#egg=pyfive
 h5py
 numpy
